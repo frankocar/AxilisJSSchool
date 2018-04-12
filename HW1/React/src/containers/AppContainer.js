@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import App from '../components/App';
 import axios from 'axios';
+import paths from '../constants/paths'
 
 class AppContainer extends Component {
 	constructor() {
@@ -18,10 +19,7 @@ class AppContainer extends Component {
 	handleIsDoneToggle = async (id, isDone) => {
 		this.setState({ isLoading: true });
 		try {
-			await axios.put(`https://react.axilis.com/fcar/todo`, {
-				id, 
-				isDone
-			});
+			await axios.put(paths.updateDoneStatus, { id, isDone });
 			this.setState({
 				todos: this.state.todos.map((todo) => {
 					if (todo.id === id) {
@@ -35,9 +33,7 @@ class AppContainer extends Component {
 			this.setState({ hasError: true });
 		} finally {
 			this.setState({
-				isLoading: false,
-				filterText: '',
-				addText: ''
+				isLoading: false
 			});
 		}
 	};
@@ -60,7 +56,7 @@ class AppContainer extends Component {
 		}
 		this.setState({ isLoading: true });
 		try {
-			let resp = await axios.post('https://react.axilis.com/fcar/todo', { text: this.state.addText });
+			let resp = await axios.post(paths.addTodo, { text: this.state.addText });
 			this.setState({
 				todos: [...this.state.todos, resp.data],
 				addText: '' //text is deleted only when the operation is successful
@@ -78,7 +74,7 @@ class AppContainer extends Component {
 	handleTrashClicked = async (todoId) => {
 		this.setState({ isLoading: true });
 		try {
-			await axios.delete(`https://react.axilis.com/fcar/todo/${todoId}`);
+			await axios.delete(paths.deleteTodo(todoId));
 			this.setState({
 				todos: this.state.todos.filter((t) => t.id !== todoId)
 			});
@@ -86,9 +82,7 @@ class AppContainer extends Component {
 			this.setState({ hasError: true });
 		} finally {
 			this.setState({
-				isLoading: false,
-				filterText: '',
-				addText: ''
+				isLoading: false
 			});
 		}
 	};
@@ -96,7 +90,7 @@ class AppContainer extends Component {
 	async componentDidMount() {
 		this.setState({ isLoading: true });
 		try {
-			let resp = await axios.get('https://react.axilis.com/fcar/todos');
+			let resp = await axios.get(paths.fetchTodos);
 			this.setState({
 				todos: resp.data
 			});
