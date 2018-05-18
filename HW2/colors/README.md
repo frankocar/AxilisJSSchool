@@ -1,3 +1,3 @@
 # HW2 
 
-Solution of the second homework assignment
+Solution to the second homework assignment
