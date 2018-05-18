@@ -31,3 +31,6 @@ a {
   padding-top: 1em;
 }
 
+.selected {
+  opacity: 0.4;
+}

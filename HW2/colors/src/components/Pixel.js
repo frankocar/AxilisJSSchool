@@ -8,6 +8,7 @@ const Pixel = (props) => {
             fill={props.color} 
             transform={`translate(${props.x}, ${props.y})`}
             onClick={() => props.onClick(props.value)}
+            className={props.selected ? "selected" : ""}
         />
     );
   };

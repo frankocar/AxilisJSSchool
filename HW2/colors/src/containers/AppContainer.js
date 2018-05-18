@@ -39,13 +39,13 @@ class AppContainer extends Component {
                     <Switch>
                         <Route path="/bw" render={() => 
                             <div className="canvas">
-                                <PixelGrid size={SIZE} colors={this.grayscale(this.state.colors)} onClick={this.handlePixelClick}/>
+                                <PixelGrid size={SIZE} colors={this.grayscale(this.state.colors)} onClick={() => null}/>
                             </div>
                         } />
                         <Route path="/(rgb|)/" render={() => 
                             <div className="canvas">
                                 <PixelGrid size={SIZE} colors={this.state.colors} onClick={this.handlePixelClick}/>
-                                <ColorPicker colors={PALETTE} onClick={this.handlePickerClick}/>
+                                <ColorPicker colors={PALETTE} onClick={this.handlePickerClick} selected={this.state.selected}/>
                             </div>
                         } />
                     </Switch>

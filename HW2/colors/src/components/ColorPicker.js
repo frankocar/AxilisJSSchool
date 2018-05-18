@@ -12,7 +12,8 @@ class ColorPicker extends PureComponent {
                 color={x} 
                 x={i} 
                 y={0} 
-                onClick={this.props.onClick}/>
+                onClick={this.props.onClick}
+                selected={this.props.selected === x}/>
         ))
 
         return (
