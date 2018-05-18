@@ -32,8 +32,6 @@ class AppContainer extends Component {
     }
 
 	render() {
-        let grid = <PixelGrid size={SIZE} colors={this.state.colors} onClick={this.handlePixelClick}/>
-
 		return (
             <BrowserRouter>
                 <div>
@@ -46,7 +44,7 @@ class AppContainer extends Component {
                         } />
                         <Route path="/(rgb|)/" render={() => 
                             <div className="canvas">
-                                {grid}
+                                <PixelGrid size={SIZE} colors={this.state.colors} onClick={this.handlePixelClick}/>
                                 <ColorPicker colors={PALETTE} onClick={this.handlePickerClick}/>
                             </div>
                         } />
